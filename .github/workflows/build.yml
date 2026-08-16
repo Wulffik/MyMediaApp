@@ -33,11 +33,10 @@ jobs:
       run: yes | flutter doctor --android-licenses || true
 
     - name: Build APK
-      run: flet build apk --platform android --verbose
+      run: flet build apk --verbose
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
         name: app-release
         path: build/apk/app-release.apk
-
