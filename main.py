@@ -314,4 +314,12 @@ def main(page: ft.Page):
         ], expand=True, spacing=0)
     )
 
+<<<<<<< HEAD
 ft.app(target=main)
+=======
+ft.run(main, view=ft.AppView.WEB_BROWSER)
+
+
+
+
+>>>>>>> 807b2cf (Update run config)
