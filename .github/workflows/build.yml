@@ -1,16 +1,40 @@
 name: Build APK
-on: [push]
+
+on:
+  push:
+    branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install flet
-      - run: flet build apk
-      - uses: actions/upload-artifact@v4
-        with:
-          name: app-apk
-          path: build/apk/app-release.apk
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # ДОБАВЛЯЕМ УСТАНОВКУ FLutter SDK (решает проблему с интерактивным запросом)
+    - name: Install Flutter SDK
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0' # или актуальная версия под требования flet
+        channel: 'stable'
+        cache: true
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install flet==0.86.5
+
+    - name: Build APK
+      run: flet build apk --verbose
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: build/sapk/app-release.apk # проверь путь к собранному apk в зависимости от версии flet
