@@ -18,12 +18,13 @@ jobs:
         python-version: '3.11'
 
     # ДОБАВЛЯЕМ УСТАНОВКУ FLutter SDK (решает проблему с интерактивным запросом)
-    - name: Install Flutter SDK
+     - name: Install Flutter SDK
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.24.0' # или актуальная версия под требования flet
+        flutter-version: '3.44.8'
         channel: 'stable'
         cache: true
+
 
     - name: Install dependencies
       run: |
